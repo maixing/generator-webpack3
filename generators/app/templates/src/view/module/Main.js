@@ -9,11 +9,11 @@ export default class Main extends React.PureComponent {
         super();
     }
     componentDidMount() {
-
     }
     render() {
         return (
             <div className="main-wrap">
+                <div className="hello"><FormattedMessage id="hello"></FormattedMessage></div>
             </div>
         )
     }
