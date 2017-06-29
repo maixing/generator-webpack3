@@ -1,0 +1,138 @@
+$main-top-height:66px;
+$main-side-width:180px;
+
+.main-wrap{
+  width: 100%;
+  height: 100%;
+  min-height: 600px;
+  min-width: 1366px;
+  position: relative;
+}
+.main-title{
+  font-size: 22px;
+  color: rgb(254, 255, 255);
+  display: inline-block;
+  height: $main-top-height;
+  line-height: $main-top-height;
+  margin-left: 45px;
+}
+.main-top{
+  position: relative;
+  width: 100%;
+  height: $main-top-height;
+  background-color: rgb(22, 129, 218);
+}
+
+.main-top-left{
+  position: relative;
+  display: inline-block;
+  width: $main-side-width;
+  height: $main-top-height;
+  text-align: center;
+  line-height: $main-top-height;
+  background: url("../../style/img/logo_white.png") no-repeat center;
+}
+
+.main-top-right{
+  position: absolute;
+  display: inline-block;
+  left: $main-side-width;
+  right: 0px;
+  height: $main-top-height;
+  border: none;
+  background-color: rgb(36, 148, 242);
+}
+.sign-out{
+  position: absolute;
+  display: inline-block;
+  right: 10px;
+  z-index: 1000;
+  height: $main-top-height;
+  line-height: $main-top-height;
+  cursor: pointer;
+}
+.main-index{
+  position: absolute;
+  width: 100%;
+  top: $main-top-height;
+  bottom: 0px;
+  background-color: cadetblue;
+}
+
+.main-index-left{
+  position: absolute;
+  display: inline-block;
+  width: $main-side-width;
+  height: 100%;
+  background-color: rgb(56, 62, 75);
+}
+
+.main-index-left-userinfo{
+  position: absolute;
+  width: 100%;
+  height: 144px;
+  background: url("../../style/img/hr.png") no-repeat bottom;
+}
+.userinfor{
+  color: #fff;
+  font-size: 14px;
+}
+.main-index-left-userinfo:first-child{
+  padding: 20px 0px 3px;
+}
+
+.main-index-left-menu{
+  position: absolute;
+  width: 100%;
+  padding-top: 15px;
+  top: 144px;
+  bottom: 0px;
+}
+
+.main-index-right{
+  position: absolute;
+  display: inline-block;
+  height: 100%;
+  left: $main-side-width;
+  right: 0px;
+  background-color: #f0f3f4;
+}
+
+.competion-index-right-top{
+
+}
+
+.competion-index-right-content{
+  width: 100%;
+  height: 100%;
+}
+.pagetransition>div{
+  width: 100%;
+  height: 100%;
+}
+
+/**
+  antd 样式覆盖区域
+*/
+.ant-row{
+  padding: 3px 0px;
+}
+.ant-menu-vertical .ant-menu-item{
+  padding-left: 27px;
+  font-size: 12px;
+  left: 0px;
+}
+.ant-menu-item>a,li{
+  display: inline;
+  color: #bfccdc;
+}
+.ant-menu{
+  background: none;
+}
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected{
+  background-color: #292d35;
+  border-right: 2px solid #108ee9;
+}
+.ant-menu-inline, .ant-menu-vertical{
+  border-right: none;
+}

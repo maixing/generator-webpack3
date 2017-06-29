@@ -1,0 +1,16 @@
+.main-spin {
+  width: 100px;
+  height: 70px;
+  overflow: auto;
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  z-index: 2000;
+  padding-top: 10px
+}
+.ant-spin-dot i{
+  background-color:#1236ff;
+}
+.ant-spin-dot{
+  margin: auto;
+}

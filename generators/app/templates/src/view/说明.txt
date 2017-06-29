@@ -1,0 +1,11 @@
+路由规划
+/
+    /login
+    /main
+        /homepage
+        /competitions
+        /operatelog
+        /training
+        /publish
+        /review
+        /usermanager
