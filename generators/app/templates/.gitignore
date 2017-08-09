@@ -11,3 +11,4 @@ bower_components
 # folder
 dist*
 _dist*
+dll

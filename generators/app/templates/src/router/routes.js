@@ -2,7 +2,8 @@ import React from 'react';
 import {Route, IndexRoute, IndexRedirect} from 'react-router';
 import { Router, hashHistory,browserHistory} from 'react-router';
 import cookie from 'js-cookie';
-import Main from '../view/module/Main'
+import Main from '../view/module/Main';
+
 
 function onEnter(nextState, replace, callback) {
     let agent = navigator.userAgent;
@@ -41,8 +42,7 @@ function onChange(prevState, nextState, replace, callback) {
     callback();
 }
 const routes = (
-    <Route path="/" component={Main}>
-        <IndexRedirect to="/"/>
+    <Route path="/" onEnter={onEnter.bind(this)} onChange={onChange.bind(this)} component={Main}>
     </Route>
 )
 
@@ -50,7 +50,7 @@ export default class Routers extends React.Component {
     render() {
         return (
             <Router history={hashHistory}>
-                {routes}
+                { routes }
             </Router>
         );
     }
