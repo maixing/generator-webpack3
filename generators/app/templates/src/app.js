@@ -1,6 +1,5 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { Router, hashHistory,browserHistory} from 'react-router';
 import 'react-resizable/css/styles.css';
 import 'antd/dist/antd.css';
 import './style/customer_ant.scss'
@@ -9,7 +8,7 @@ import './style/magic.css';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import 'react-progress-2/main.css';
 import 'font-awesome/css/font-awesome.min.css';
-import routes from './router/routes';
+import Routes from './router/routes';
 import promis from 'es6-promise';
 import configureStore from './redux/configureStore';
 import {init} from './util/componentCache';
@@ -26,7 +25,7 @@ module.exports = (
    <IntlProvider locale={cnLocale.locale} messages={cnLocale.messages}>
         <LocaleProvider>
             <Provider store={store}>
-                <Router history={hashHistory} routes={routes}/>
+                <Routes></Routes>
             </Provider>
         </LocaleProvider>
     </IntlProvider>

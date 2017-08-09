@@ -1,11 +1,12 @@
 import React from 'react';
 import {Route, IndexRoute, IndexRedirect} from 'react-router';
+import { Router, hashHistory,browserHistory} from 'react-router';
 import cookie from 'js-cookie';
-import main from '../view/module/Main';
-
+import Main from '../view/module/Main'
 
 function onEnter(nextState, replace, callback) {
     let agent = navigator.userAgent;
+    console.log(agent);
     var regStr_ie = /MSIE\/[\d.]+/gi;
     var regStr_ff = /Firefox\/[\d.]+/gi;
     var regStr_chrome = /Chrome\/[\d.]+/gi;
@@ -39,7 +40,18 @@ function onEnter(nextState, replace, callback) {
 function onChange(prevState, nextState, replace, callback) {
     callback();
 }
-export default (
-    <Route path="/" onEnter={onEnter.bind(this)} onChange={onChange.bind(this)} component={main}>
+const routes = (
+    <Route path="/" component={Main}>
+        <IndexRedirect to="/"/>
     </Route>
-);
+)
+
+export default class Routers extends React.Component {
+    render() {
+        return (
+            <Router history={hashHistory}>
+                {routes}
+            </Router>
+        );
+    }
+}

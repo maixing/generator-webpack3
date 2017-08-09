@@ -14,7 +14,7 @@ module.exports = merge(webpackConfig, {
         hints: false // 性能提示[warning,error,false]
     },
     entry: {
-        app: ['webpack-hot-middleware/client?http://localhost:3000', path.resolve(__dirname, '../src/index.js')]
+        app: ['babel-polyfill','webpack-hot-middleware/client?reload=true?http://localhost:3000', path.resolve(__dirname, '../src/index.js')]
     },
     module: {
         rules: [

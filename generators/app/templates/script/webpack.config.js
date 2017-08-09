@@ -3,6 +3,7 @@
  */
 let path = require('path');
 let webpack = require('webpack');
+require("babel-polyfill");//兼容ie9,10配置
 module.exports = {
     entry: {},
     output: {
@@ -36,5 +37,6 @@ module.exports = {
         ]
     },
     plugins: [
+        new webpack.optimize.ModuleConcatenationPlugin(),
     ],
 };

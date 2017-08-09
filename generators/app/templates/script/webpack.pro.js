@@ -8,6 +8,8 @@ let webpackConfig = require('./webpack.config.js');
 let ExtractTextPlugin = require('extract-text-webpack-plugin');
 let UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin;
 require("babel-polyfill");//兼容ie9,10配置
 module.exports = merge(webpackConfig, {
     devtool: 'false',
@@ -30,11 +32,8 @@ module.exports = merge(webpackConfig, {
                         {
                             loader: 'postcss-loader',
                             options: {
-                                plugins: function () {
-                                    return [
-                                        require('autoprefixer'),
-                                        require('cssnano')
-                                    ];
+                                config:{
+                                    path:  path.resolve(__dirname, './postcss.config.js')
                                 }
                             }
                         }
@@ -55,11 +54,8 @@ module.exports = merge(webpackConfig, {
                         {
                             loader: 'postcss-loader',
                             options: {
-                                plugins: function () {
-                                    return [
-                                        require('autoprefixer'),
-                                        require('cssnano')
-                                    ];
+                                config:{
+                                    path:  path.resolve(__dirname, './postcss.config.js')
                                 }
                             }
                         },
@@ -81,11 +77,8 @@ module.exports = merge(webpackConfig, {
                         {
                             loader: 'postcss-loader',
                             options: {
-                                plugins: function () {
-                                    return [
-                                        require('autoprefixer'),
-                                        require('cssnano')
-                                    ];
+                                config:{
+                                    path:  path.resolve(__dirname, './postcss.config.js')
                                 }
                             }
                         },
@@ -96,54 +89,30 @@ module.exports = merge(webpackConfig, {
         ]
     },
     plugins: [
-        new ExtractTextPlugin({
-            filename: 'app.css',
-            disable: false,
-            allChunks: true
+        new ExtractTextPlugin('[name].css'),
+        new webpack.optimize.UglifyJsPlugin({
+            sourceMap: false,
+            compress: true,
         }),
-        new UglifyJsPlugin({
-            beautify: false,
-            comments: false,
-            compress: {
-                warnings: false,
-                screw_ie8: true,
-                conditionals: true,
-                unused: true,
-                comparisons: true,
-                sequences: true,
-                dead_code: true,
-                evaluate: true,
-                if_return: true,
-                join_vars: true,
-            }
-        }),
+        // new BundleAnalyzerPlugin({
+        //     analyzerMode: 'static',
+        // }),
+        new webpack.optimize.AggressiveMergingPlugin(), // Merge chunks
         new webpack.DefinePlugin({ 'process.env.NODE_ENV': '"production"' }),
         new HtmlWebpackPlugin({
             title: 'ultra-react-webpack2-study',
             template: path.resolve(__dirname, '../src/index.html'),
             inject: false,
-            minify: {
-                html5: true,
-                collapseWhitespace: true,
-                removeComments: true,
-                removeTagWhitespace: true,
-                removeEmptyAttributes: true,
-                removeStyleLinkTypeAttributes: true,
-            },
+            favicon:path.resolve(__dirname, '../src/favicon.ico')
+            // minify: {
+            //     html5: true,
+            //     collapseWhitespace: true,
+            //     removeComments: true,
+            //     removeTagWhitespace: true,
+            //     removeEmptyAttributes: true,
+            //     removeStyleLinkTypeAttributes: true,
+            // },
         }),
-        // new webpack.LoaderOptionsPlugin({
-        //     options: {
-        //         postcss: function(){
-        //             return [
-        //                 require("autoprefixer")({
-        //                     browsers: ['ie>=8','>1% in CN']
-        //                 }),
-        //                 require('postcss-smart-import')({ /* ...options */ }),
-        //                 require('precss')({ /* ...options */ }),
-        //             ]
-        //         }
-        //     }
-        // })
         // new webpack.optimize.CommonsChunkPlugin({
         //     name: "commons",
         //     filename: "commons.js",
