@@ -1,7 +1,7 @@
 {
   "name": "generator-webpack3",
-  "version": "0.0.6",
-  "description": "webpack react ant",
+  "version": "0.0.7",
+  "description": "webpack3 react ant",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,7 +12,7 @@
   },
   "keywords": [
     "yeoman-generator",
-    "webpack",
+    "webpack3",
     "react",
     "ant"
   ],

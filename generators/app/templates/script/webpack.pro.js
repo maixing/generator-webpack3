@@ -8,11 +8,17 @@ let webpackConfig = require('./webpack.config.js');
 let ExtractTextPlugin = require('extract-text-webpack-plugin');
 let UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-  .BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 require("babel-polyfill");//兼容ie9,10配置
 module.exports = merge(webpackConfig, {
     devtool: 'false',
+    output: {
+        path: path.resolve(__dirname, '../dist'),
+        filename: '[name].[chunkhash:8].js',
+        publicPath: '',
+        chunkFilename: '[name].[chunkhash:8].chunk.js'
+    },
     entry: {
         app: ['babel-polyfill', path.resolve(__dirname, '../src/index.js')]
     },
@@ -39,6 +45,13 @@ module.exports = merge(webpackConfig, {
                         }
                     ]
                 })
+            },
+            {
+                test: /\.json$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'json-loader'
+                }
             },
             {
                 test: /\.scss$/,
@@ -89,7 +102,7 @@ module.exports = merge(webpackConfig, {
         ]
     },
     plugins: [
-        new ExtractTextPlugin('[name].css'),
+        new ExtractTextPlugin('[name].[chunkhash:8].css'),
         new webpack.optimize.UglifyJsPlugin({
             sourceMap: false,
             compress: true,
@@ -102,20 +115,12 @@ module.exports = merge(webpackConfig, {
         new HtmlWebpackPlugin({
             title: 'ultra-react-webpack2-study',
             template: path.resolve(__dirname, '../src/index.html'),
-            inject: false,
+            inject: true,
             favicon:path.resolve(__dirname, '../src/favicon.ico')
-            // minify: {
-            //     html5: true,
-            //     collapseWhitespace: true,
-            //     removeComments: true,
-            //     removeTagWhitespace: true,
-            //     removeEmptyAttributes: true,
-            //     removeStyleLinkTypeAttributes: true,
-            // },
         }),
         // new webpack.optimize.CommonsChunkPlugin({
         //     name: "commons",
-        //     filename: "commons.js",
+        //     filename: "[name].js",
         // })
     ],
 });

@@ -13,8 +13,13 @@ module.exports = merge(webpackConfig, {
     performance: { // 关闭hot更新导致文件过大提示
         hints: false // 性能提示[warning,error,false]
     },
+    output: {
+        path: path.resolve(__dirname, '../dist'),
+        filename: 'app.js',
+        publicPath: '',
+    },
     entry: {
-        app: ['babel-polyfill','webpack-hot-middleware/client?reload=true?http://localhost:3000', path.resolve(__dirname, '../src/index.js')]
+        app: ['babel-polyfill','webpack-hot-middleware/client?reload=true?http://localhost:'+process.env.PORT, path.resolve(__dirname, '../src/index.js')]
     },
     module: {
         rules: [
@@ -67,10 +72,11 @@ module.exports = merge(webpackConfig, {
         new webpack.NamedModulesPlugin(),
         //dll配置
         new webpack.DllReferencePlugin({context: __dirname, manifest: require('../dll/app-manifest.json')}),
-        new OpenBrowserPlugin({ url: 'http://localhost:3000' }),
+        new OpenBrowserPlugin({ url: 'http://localhost:'+process.env.PORT}),
         new HtmlWebpackPlugin({
             title: 'ultra-react-webpack2-study',
             template: path.resolve(__dirname, '../src/_index.html'),
+            favicon:path.resolve(__dirname, '../src/favicon.ico'),
             inject: false,
             minify: {
                 html5: true,

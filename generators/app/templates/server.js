@@ -20,7 +20,7 @@ app.use(require('webpack-dev-middleware')(compiler, {
     },
 }));
 app.use(require('webpack-hot-middleware')(compiler));
-app.set('port', process.env.PORT || 10010);
+app.set('port', process.env.PORT || parseInt(process.env.PORT));
 app.listen(app.get('port'), function (err) {
     if (err) {
         console.log(err);

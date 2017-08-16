@@ -2,7 +2,7 @@ import React from 'react';
 import {Route, IndexRoute, IndexRedirect} from 'react-router';
 import { Router, hashHistory,browserHistory} from 'react-router';
 import cookie from 'js-cookie';
-import Main from '../view/module/Main';
+// import Main from '../view/module/Main';
 
 
 function onEnter(nextState, replace, callback) {
@@ -41,11 +41,22 @@ function onEnter(nextState, replace, callback) {
 function onChange(prevState, nextState, replace, callback) {
     callback();
 }
-const routes = (
-    <Route path="/" onEnter={onEnter.bind(this)} onChange={onChange.bind(this)} component={Main}>
-    </Route>
-)
-
+// const routes = (
+//     <Route path="/" onEnter={onEnter.bind(this)} onChange={onChange.bind(this)} component={Main}>
+//     </Route>
+// )
+const routes = [
+    {
+        path: '/',
+        onEnter:onEnter,
+        onChange:onChange,
+        getComponent (nextState, cb) {
+            require.ensure([], function (require) {
+                cb(null, require('../view/module/Main').default)
+            })
+        }
+    },
+]
 export default class Routers extends React.Component {
     render() {
         return (

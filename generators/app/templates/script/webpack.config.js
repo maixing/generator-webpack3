@@ -6,11 +6,6 @@ let webpack = require('webpack');
 require("babel-polyfill");//兼容ie9,10配置
 module.exports = {
     entry: {},
-    output: {
-        path: path.resolve(__dirname, '../dist'),
-        filename: '[name].js',
-        publicPath: ''
-    },
     module: {
         rules: [
             {
