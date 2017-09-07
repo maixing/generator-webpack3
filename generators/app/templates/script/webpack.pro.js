@@ -111,7 +111,9 @@ module.exports = merge(webpackConfig, {
         //     analyzerMode: 'static',
         // }),
         new webpack.optimize.AggressiveMergingPlugin(), // Merge chunks
-        new webpack.DefinePlugin({ 'process.env.NODE_ENV': '"production"' }),
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production')
+        }),
         new HtmlWebpackPlugin({
             title: 'ultra-react-webpack2-study',
             template: path.resolve(__dirname, '../src/index.html'),

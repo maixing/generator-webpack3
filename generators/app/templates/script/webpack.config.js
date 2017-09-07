@@ -3,6 +3,7 @@
  */
 let path = require('path');
 let webpack = require('webpack');
+let CopyWebpackPlugin = require('copy-webpack-plugin');
 require("babel-polyfill");//兼容ie9,10配置
 module.exports = {
     entry: {},
@@ -10,7 +11,7 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/,
-                exclude: /node_modules/,
+                exclude: [/node_modules/,path.resolve(__dirname, "../plugin")],
                 use: {
                     loader: 'babel-loader',
                 },
@@ -33,5 +34,8 @@ module.exports = {
     },
     plugins: [
         new webpack.optimize.ModuleConcatenationPlugin(),
+        new CopyWebpackPlugin([
+            { from: path.resolve(__dirname, "../resource"), to: path.resolve(__dirname, '../dist/resource') },
+        ]),
     ],
 };

@@ -72,7 +72,7 @@ module.exports = merge(webpackConfig, {
         new webpack.NamedModulesPlugin(),
         //dll配置
         new webpack.DllReferencePlugin({context: __dirname, manifest: require('../dll/app-manifest.json')}),
-        new OpenBrowserPlugin({ url: 'http://localhost:'+process.env.PORT}),
+        new OpenBrowserPlugin({ url: 'http://localhost:'+process.env.PORT.toString()}),
         new HtmlWebpackPlugin({
             title: 'ultra-react-webpack2-study',
             template: path.resolve(__dirname, '../src/_index.html'),
